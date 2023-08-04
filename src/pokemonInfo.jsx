@@ -23,7 +23,14 @@ const PokemonInfo = () => {
     <div>
       <input onChange={(event) => setPoke(event.target.value)} />
       <button onClick={() => fetchData(poke)}></button>
-      {poke.name && <h2>{poke.name}</h2>}
+      {poke.name && (
+        <div>
+          <h2>{poke.name}</h2>
+          <img>
+            src={poke.img} alt={poke.name}
+          </img>
+        </div>
+      )}
     </div>
   );
 };
