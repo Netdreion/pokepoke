@@ -1,27 +1,30 @@
-import {useState} from "react"
+import { useState } from "react";
 
-const PokemonInfo=()=>{
-const[poke,setPoke]=useState({})
+const PokemonInfo = () => {
+  const [poke, setPoke] = useState({});
 
-const fetchData=async(poke)=>{
-    const url="https://pokeapi.co/api/v2/pokemon/{poke}/"
+  const fetchData = async (poke) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${poke}/`;
 
     try {
-        const response=await axios(url)
-        return responde.data.map((pokecard)=>({
-            name:pokecard.name,
-            img:pokecard.img,
-            description:pokecard.description
-        }))
+      const response = await fetch(url);
+      const { name, sprites, species } = response.data;
+      setPoke({
+        name,
+        img: sprites.front_default,
+      });
+    } catch (error) {
+      console.log(error);
     }
-}catch(error){
-    console.log(error)
-}
+    fetchData();
+  };
 
-    return(
-        <div>
-            <input/>
-            <button></button>
-        </div>
-    )
-}
+  return (
+    <div>
+      <input onChange={(event) => setPoke(event.target.value)} />
+      <button onClick={() => fetchData(poke)}></button>
+      {poke.name && <h2>{poke.name}</h2>}
+    </div>
+  );
+};
+export default PokemonInfo;
