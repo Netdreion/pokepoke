@@ -8,8 +8,13 @@ const PokemonInfo = () => {
     const url = `https://pokeapi.co/api/v2/pokemon/${pokeName}/`;
 
     try {
+      console.log(url);
       const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("network response was not ok");
+      }
       const data = await response.json();
+
       console.log("API Response:", data);
       const { name, sprites } = data;
       setPoke({
