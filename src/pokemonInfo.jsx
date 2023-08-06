@@ -8,8 +8,7 @@ const PokemonInfo = () => {
     const url = `https://pokeapi.co/api/v2/pokemon/${pokeName}/`;
 
     try {
-      console.log(url);
-      const response = await fetch(url);
+      const response = await fetch(url); //fetching data from Api
 
       const data = await response.json();
 
@@ -33,6 +32,7 @@ const PokemonInfo = () => {
       {poke.name && (
         <div>
           <h2>{poke.name}</h2>
+
           <img src={poke.img} alt={poke.name} />
         </div>
       )}
